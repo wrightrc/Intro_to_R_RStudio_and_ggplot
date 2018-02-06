@@ -1,7 +1,7 @@
 ---
-title: "Introduction to R and RStudio"
+title: "Introduction to R, RStudio and timecourse flow cytometry"
 author: "R Clay Wright"
-date: "`r Sys.time()`"
+date: '`r Sys.time()`'
 output:
   word_document:
     reference_docx: Intro_to_R_styles.docx
@@ -23,22 +23,31 @@ Throughout the tutorial you will find several sections with this label followed 
 
 The text within this tutorial is formatted to differentiate code from dialog. `text that looks like this` is R code or keyboard commands. You can copy and paste this code into an R console and execute it. Within multiline blocks of code functions will be colored blue, comments will be colored green, strings will be teal and Booleans will be red. If you don't know what any of these terms mean yet, don't worry, we'll get to them. 
 
-In some cases the output from the code will be included in blocks of code. This output will be prefixed with `#>`. 
+In some cases the output from the code will be included in blocks of code. This output will be prefixed with `#>`. Here's an example:
+
+```{r}
+print("This is the output from the code")
+```
 
 Let's get started!
 
 #The R programming language
 R is a programming language for statistical computing and graphics generation. R is based on an older statistical computing language called S. It is freely available and open source. It can be downloaded for your personal computer [here](http://www.r-project.org). 
 
-R is a line-oriented language, meaning each line of code is run or interpreted independently (if you are familiar with C/C++ you will know each bit of code must be followed by a semicolon). Just one of the many great things about R is its beautiful integrated development environment (IDE, a program that provides a clean work space and numerous tools to assist you in coding). A good IDE can make learning a language much easier, and even if you are an experienced coder a good IDE can make you much more efficient.
+R is a line-oriented language, meaning each line of code is run or interpreted independently (as opposed to C/C++/Java and other "compiled" languages, in which the  program must be run at a time). This makes R and other line-oriented languages easy to learn and understand, because you can quickly see the results of each line of code and experiment with changes to that line. 
+
+Another of the many great things about R is its beautiful integrated development environment (IDE, a program that provides a clean work space and numerous tools to assist you in coding). A good IDE can make learning a language much easier, and even if you are an experienced coder a good IDE can make you much more efficient.
 
 ##RStudio 
-This wonderful IDE for R is called RStudio. For your personal computer it can be downloaded [here](http://www.rstudio.com). Let's take a look around the RStudio window. 
+This wonderful IDE for R is called RStudio. For your personal computer it can be downloaded [here](http://www.rstudio.com). Let's take a look around the RStudio window. You will see several panes within the RStudio window.
 
-You will see several panes within the RStudio window.
-###The Console pane
-We'll start with the **Console** pane. It is in the bottom-left corner labeled **Console** at the top left. (If the **Source** pane is closed, the **Console** pane may take up the whole left side of the window). The **Console** is essentially an R command line window. You can type in anything following the `>` then press `return` (or `Enter`) and whatever you typed will be interpreted by R and the appropriate output will be returned. R understands all basic algebra as well as logical expressions (aka Boolean expressions). Try running the following lines in the console!
-```{r}
+![](Rstudio.png)
+
+
+###The Source pane
+We'll start with the **Source** pane. It is in the top left of the RStudio window. (If you don't see this pane, create a new `.R` file by pressing `shift + command(or ctrl) + N`, or click the universal 'New Document' icon and select 'R script'). **Source** shows the '.R' files containing the scripts (multiple lines of related code) with which you are currently working. This is where you will spend most of your time building and testing lines of code and then combining them to make scripts for data analysis. Type the following into your script.  
+
+```{r, eval=FALSE}
 2+2
 9/3
 3^3
@@ -46,15 +55,32 @@ We'll start with the **Console** pane. It is in the bottom-left corner labeled *
 2<3
 ```
 
-###The Source pane
-In the top left of the screen is the **Source** pane. (If you don't see this pane, create a new `.R` file by pressing `shift + command(or ctrl) + N`, or click the universal 'New Document' icon and select 'R script'). **Source** shows the '.R' files containing the scripts (multiple lines of related code) with which you are currently working. This is where you will spend most of your time building and testing lines of code and then combining them to make scripts for data analysis. 
+To run a line of code from the **Source** pane you place your cursor anywhere in a line of code and press `command/ctrl + enter` (or use the "Run" button in the top right of the **Source** pane. This will copy your line of code into the console and execute it. If you want to run a fraction of a line of code you can select just the portion you want to run and press `command/ctrl + enter`. Go ahead and run these lines of code and let's see what happens in the **Console** pane.
 
-In addition to being a basic calculator, R interprets functions or variables that can be assigned to and represented by words. Variables (any peice of data of any variety) will be single words possibly followed by a $ or square brackets [] if the variable is a matrix (more on those symbols later). Functions are followed by parentheses containing the arguments passed to the function.
+###The Console pane
+It is in the bottom-left corner labeled **Console** at the top left. (If the **Source** pane is closed, the **Console** pane may take up the whole left side of the window). The **Console** is essentially an R command line window. You can type in anything following the `>` then press `return` (or `Enter`) and whatever you typed will be interpreted by R and the appropriate output will be returned. R understands all basic algebra as well as logical expressions (aka Boolean expressions).
+
+The `>` is the R command prompt. If you don't see this in the **Console** then that mean R is still running another command or is potentially asking you to answer a question. Make sure you see the command prompt before running more lines of code or you will potentially miss the output from these lines and/or any errors that may have occurred! 
+
+In addition to being a basic calculator (as shown in our examples above), R can create and interpret functions or variables that can be assigned to and represented by words. Variables (any peice of data of any variety) will be single words possibly followed by a $ or square brackets [] if the variable is a matrix (more on those symbols later). Functions are followed by parentheses containing the arguments passed to the function.
 
 ####Variables and Functions 
->R is an object oriented language like most other modern programming languages. This means we can use R to create abstracted objects that contain data (of any type, shape or size) called variables or procedures/methods (individual blocks of code) commonly called functions. There are numerous functions and datasets included in the base R installation. Also, as an open source language countless programmers in the R community have written useful functions and created useful datasets that are freely available in the form of R-packages (more on these later). You can also write your own! 
+R is an object oriented language like most other modern programming languages. This means we can use R to create abstracted objects that contain data (of any type, shape or size) called variables or procedures/methods (individual blocks of code) commonly called functions. There are numerous functions and datasets included in the base R installation. Also, as an open source language countless programmers in the R community have written useful functions and created useful datasets that are freely available in the form of R-packages (more on these later). You can also write your own! 
 
-The big difference between using RStudio and running R from the command line is that this pane has an auto-complete feature. Try typing `pri` into R-script in the **Source** pane. RStudio automatically provides you with a list of all the available functions and variables beginning with 'pri'! 
+```{r, eval= FALSE}
+iris
+# iris is a variable representing a famous data set of iris flower morphology
+
+print(x = "print() is a function")
+# print() is a functions that prints the argument x in the console
+# Here we have assigned "print() is a function" to the argument x
+```
+
+####Comments  
+To prevent code from being executed, or take note about what your code does or how to use your code (like I have done above) you can make "comments" by prepending any text with a `#`.
+
+####Tab-complete
+One of the most helpful things about RStudio is that it has an auto-complete feature! Try typing `pri` into R-script in the **Source** pane. RStudio automatically provides you with a list of all the available functions and variables beginning with 'pri'! 
 
 You can navigate this list using the arrow keys or your mouse. When you select a particular object, RStudio also gives you some information about that object. Navigate down to `print` (if there are multiple, select the one that has {base} at the far right) and press `tab`. You will see that RStudio has completed `print` in the console and added a set of parentheses because `print` is a function, `print()`. Now we can add arguments that this function will operate on, within the parentheses. But what does this function do? To figure out type `?print` in the **Console** and press `return`. This opens the documentation for this function in the **Help** pane. A `?` before any function name, or passing a function name to the `help()` function will do the same.
 
@@ -82,23 +108,27 @@ Additionally, there is a search engine specific to R resources including the doc
 
 ####OK, back to the Source pane...
 You should have `print()` in there now.   
-Put your cursor in the middle of the parentheses and press `tab`. RStudio will feed you all of the arguments of this function using auto-complete! Press `tab` again and `x = ` will appear in the parentheses. Type `"hello world"` and press `command/ctrl + return`. This will copy your line of code into the console and execute it. Amazing! Your first line of R code worked, hopefully...
+Put your cursor in the middle of the parentheses and press `tab`. RStudio will feed you all of the arguments of this function using auto-complete! Press `tab` again and `x = ` will appear in the parentheses. Type `"hello world"` and press `command/ctrl + return`. 
 
 ```{r}
-print("hello world")
+print(x = "hello world")
 ```
 
 Take note that if you are missing the quotes around `hello world` R will look for a variable named `hello` and return an error.  
 
 If your code didn't work, try to fix it and run it again. 
 
-`command + return` (`ctrl + enter` on Windows machines) can be used to execute a whole line or any selected code. To prevent code from being executed, or take note about what your code does or how to use your code you can make "comments" by prepending any text with a `#`. Now just select `x = "hello world"` and press `command + return` (or `ctrl + enter`). You just created your first variable object in R! 
+Now let's practice running a fraction of a line of code. Just highlight the `x = "hello world"` within the parentheses and press `command + return` (or `ctrl + enter`). You just created your first variable object in R! 
 
 ###The Environment pane
-See, over on the top right next to `x` is "hello world". You can now execute just `print(x)`, and you will get `[1] "hello world"`! The **Environment** pane shows all of the objects you have created or stored in memory. You can view data sets or functions by clicking on them, but at the moment we only have the simple variable `x`. Don't worry, we'll practice this later.
+See, over on the top right next to `x` is "hello world". You can now execute just `print(x)`, and you will get `[1] "hello world"`! The **Environment** pane shows all of the objects you have created or stored in memory. You can view data sets or functions by clicking on them, but at the moment we only have the simple variable `x`. Don't worry, we'll practice viewing objects later.
 
 ##Variables and data types
-You can create objects (variables~values, large data structures~think spreadsheets and databases, and functions) using the `=`, `<-` or `->` operators. You can see what type of data (or data type) a variable is using the `class` function. Go ahead, try `class(x)`. Data in R can be of several different, basic types:
+You can create objects (variables~values, large data structures~think spreadsheets and databases, and functions~chunks of code) using the `=`, `<-` or `->` operators, to assign code or code results to an object name. 
+
+*It is preferable to use the `<-` operator when creating objects as it keeps the object names on the left, and the `=` operator is used to assign argument values to functions, so we will reserve `=` for that.* 
+
+You can see what type of data (or data type) a variable is using the `class` function. Go ahead, try running `class(x)`. Data in R can be of several different, basic types:
 
 Data Type |aka        |Example
 ----------|-----------|---------
@@ -194,14 +224,15 @@ What class of data is `d$fac`?
 ***
 
 ####Factors
->Factors used to be an efficient way of storing large vectors of repetitive discrete or categorical data. Factors do this by translating the potentially long individual pieces of data into integers, using a table called levels. Try `levels(d$fac)`. So R will use this key with 1 = A, 2 = B, 3 = C, to read and write this factor. To see how R sees `d$fac` we can use `as.integer(d$fac)`. R now stores large data structures by indexing values like this regardless of whether it's a factor of not. Despite this fact there are still some useful features of factors. 
->
->For one, factors can only take on values within the `levels` vector. This means that if you are manually entering things like genotype as you are collecting your data, R can help alert you to spelling mistakes. 
->
->Giving `?factor` a look, you will see that we can also assign a particular order to the levels of a factor. This can be handy for ordering variables when plotting. We can also assign labels to the levels, just in case your level names are too abstracted to be understandable. 
->
->However when manipulating data frames containing factors you must be careful because some functions may interpret factors as their integer values! We could also avoid creating a factor in our data frame and just keep this column as characters by including `stringsAsFactors = F` in our call to `data.frame()`.
+Factors used to be an efficient way of storing large vectors of repetitive discrete or categorical data. Factors do this by translating the potentially long individual pieces of data into integers, using a table called levels. Try `levels(d$fac)`. So R will use this key with 1 = A, 2 = B, 3 = C, to read and write this factor. To see how R sees `d$fac` we can use `as.integer(d$fac)`. R now stores large data structures by indexing values like this regardless of whether it's a factor of not. Despite this fact there are still some useful features of factors. 
 
+For one, factors can only take on values within the `levels` vector. This means that if you are manually entering things like genotype as you are collecting your data, R can help alert you to spelling mistakes. 
+
+Giving `?factor` a look, you will see that we can also assign a particular order to the levels of a factor. This can be handy for ordering variables when plotting. We can also assign labels to the levels, just in case your level names are too abstracted to be understandable. 
+
+However when manipulating data frames containing factors you must be careful because some functions may interpret factors as their integer values! We could also avoid creating a factor in our data frame and just keep this column as characters by including `stringsAsFactors = F` in our call to `data.frame()`.
+
+###Back to data frames
 Going back to our data frame `d`, similar to vectors we can access rows, columns and elements of the data frame using the square bracket operator. I'll suppress the output below and let you run these examples yourself. 
 ```{r, eval = F}
 #get the first row of d
@@ -254,172 +285,72 @@ What fraction of the sum of your new column is each row's value? Make a new colu
 
 #Data analysis and visualization
 
-##Importing and exporting data
-Enough with these toy examples, let's look at some real data! Below we will analyze some real data from today's reading [Guseman et al. 2015](http://dx.doi.org/10.1242/dev.117234). 
+Enough with these toy examples, let's look at some real data! Below we will analyze some real data from today's reading [Guseman et al. 2015](http://dx.doi.org/10.1242/dev.117234). The Nemhauser lab has pioneered a technique by which plant signaling network dynamics can be measured in yeast using flow cytometry. The genes constituting these signaling networks are expressed in yeast and potentially fused with a fluorescent protein to allow dynamic measurement. Liquid cultures of yeast expressing these signaling proteins can be stimulated with the input signal and the response of the tagged proteins can then be measured using flow cytometry.
 
-R provides convenient functions for reading data of many types into memory. These functions include `read.csv` and `read.table` along with many others. R also has several packages of functions for analyzing flow cytometry data. The Nemhauser lab has pioneered a technique by which plant signaling network dynamics can be measured using flow cytometry.
+R provides convenient functions for reading data of many types into memory. These functions include `read.csv` and `read.table` along with many others. R also has several packages of functions for analyzing flow cytometry data. 
 
 ####Flow Cytometry
->As you might remember from digging deep into the methods of last weeks reading, [Havens et al. 2012](http://dx.doi.org/10.1104/pp.112.202184), flow cytometry measures light scattering, absorption, and emission of single cells, by passing a stream of cells through the path of a laser in rapid succession. Light scattered from the laser beam is detected as a pulse beginning when the cell enters the laser beam peaking when the cell is centered in the beam, and ending when the cell leaves the beam. The cytometer collects the maximum height of the signal from this pulse (H), the total area of the pulse (A) and the width of the pulse (W). Light is scattered in all directions as the cell passes through the beam and how much light is scattered and in what direction can tell us a lot about a cell. Typically, light that passes through the cell is measured as forward-scattered light or 'FSC' and this is considered proportional to a cells size. The cell actually acts as a lens bending the light, therefore the smaller the cell the more light is bent away from the forward-scatter detector, whereas larger cells allow more light to pass straight through. Dead cells appear very low on the FSC axis.  
->
->Side-scattered light or 'SSC' is the light that is reflected perpendicular, or at a wide angle, relative to the laser beam. SSC is proportional to the internal complexity, or granularity, of the cell. Imagine all of those tiny, circuitous, membrane-bound organelles acting as little lenses bending light in all sorts of directions. 
->
->Similarly side-scattered light at different wavelengths from the laser is collected as a measure of the fluorescence of the cell. Because light is scattered at all angles you can measure fluorescence at many wavelengths. For our example experiment below, the fluorescence of the Aux/IAA-fluorescent-protein fusion is detected as 'FL1'. 
+As you might remember from digging deep into the methods of last weeks reading, [Havens et al. 2012](http://dx.doi.org/10.1104/pp.112.202184), flow cytometry measures light scattering, absorption, and emission of single cells, by passing a stream of cells through the path of a laser in rapid succession. Light scattered from the laser beam is detected as a pulse beginning when the cell enters the laser beam peaking when the cell is centered in the beam, and ending when the cell leaves the beam. The cytometer collects the maximum height of the signal from this pulse (H), the total area of the pulse (A) and the width of the pulse (W). Light is scattered in all directions as the cell passes through the beam and how much light is scattered and in what direction can tell us a lot about a cell. Typically, light that passes through the cell is measured as forward-scattered light or 'FSC' and this is considered proportional to a cells size. The cell actually acts as a lens bending the light, therefore the smaller the cell the more light is bent away from the forward-scatter detector, whereas larger cells allow more light to pass straight through. Dead cells appear very low on the FSC axis.  
 
-First, let's install a few packages so we can analyze some flow cytometry data. 
+Side-scattered light or 'SSC' is the light that is reflected perpendicular, or at a wide angle, relative to the laser beam. SSC is proportional to the internal complexity, or granularity, of the cell. Imagine all of those tiny, circuitous, membrane-bound organelles acting as little lenses bending light in all sorts of directions. 
 
-##Packages
+Similarly side-scattered light at different wavelengths from the laser is collected as a measure of the fluorescence of the cell. Because light is scattered at all angles you can measure fluorescence at many wavelengths. For our example experiment below, the fluorescence of the Aux/IAA-fluorescent-protein fusion is detected as 'FL1'. 
 
-There are three places where R packages are available:  
-1. [CRAN](http://cran.r-project.org/web/packages/) contains a huge variety of general packages,  
-2. [bioConductor](http://bioconductor.org/) contains packages related to high throughput biological (mostly -omics) data,  
-3. Packages in development may be available from code repositories such as [GitHub](http://github.com),  [Bitbucket](http://bitbucket.org) or others. 
+Let's take a quick look at what this raw flow cytometry data looks like.
 
-```{r, eval= F}
-#install a package from CRAN (if you exclude 'repos' it will give you a list and ask you to select a repository server)
-install.packages('ggplot2', repos = 'http://cran.fhcrc.org/')
-#before using the package we must load it into our workspace
-library('ggplot2')
-
-#we will also need the ‘dplyr’ package
-install.packages('dplyr', repos = 'http://cran.fhcrc.org/')
-library('dplyr') 
-
-#installing from bioConductor is a little more complicated
-source("http://bioconductor.org/biocLite.R")
-biocLite()
-#you only have to run the above 2 lines the first time you use bioConductor during an R session
-#install the package 'flowCore'
-biocLite('flowCore')
-#If this asks you to update packages, you don't need to. Type 'n' and press 'return'.
-
-#You need some development tools to use install_github, which will take to long to download and install in class, so let's instead download the flowTime package from course page on catalyst and install it.
-install.packages("~/Downloads/flowTime_0.99.1.tgz", repos = NULL, type = "source")
-# !!!You may have to modify the path depending on where you have saved flowTime_0.99.1.tgz!!!
-```
-Make sure `flowTime_0.99.1.tgz` is in the `Downloads` folder before running this line, you might also want to make sure that your R session is in your user home folder using `getwd()`
-
-Just in case you want to use github in the future I'll include some instructions, but don't run these now.
-```{r, eval=F}
-#installing from a code repository requires the 'devtools' package from CRAN
-install.packages('devtools')
-#you will also need to install xcode from the app store
-#load this package
-library(devtools)
-#install a package from github
-devtools::install_github(repo = 'flowTime', user = 'wrightrc')
-```
-Now that we have installed these packages we can load some flow cytometry data using the `read.flowSet` function. Download `flowSet.zip` from the catalyst webpage and unzip it into the `Downloads` folder.
-```{r}
-library(flowTime)
-flowSet <- read.flowSet(path = 'flowSet', alter.names = T)
-#!!! Again make sure the path variable here is correct !!!
-# This line assumes the flowSet folder is in your working directory
-```
-***
-#####???Question???
-What does `alter.names = T` do?
-*answer here*  
-
-***  
-
-At the moment all of the information that we have about this data is the fluorescence measurements and the time at which each well of the plate was read. We need to annotate this data with the information about the strain and treatment that was loaded into each well. We have recorded this information in a csv file (made using Excel). We need attach this spreadsheet to our flowSet so that in the future we (and our collaborators or lab mates) can simply load this information in with the flowSet.
-
-Download `annotation.csv` to your `Dowloads` folder.
-```{r}
-annotation <- read.csv('~/Downloads/annotation.csv')
-```
-
-***
-#####???Questions???
-Write a line of code to figure out the column names of annotation.
-*answer here*
-
-***
-
-##Very basic data wrangling
-
-In this annotation data frame `strain` includes IAA14 and several mutant variants of IAA14 each fused to a fluorescent protein. We can see the list of possible strains using the code below.
-```{r}
-unique(annotation$strain)
-```
-
-***
-#####???Questions???  
-What is the AFB used in this experiment?
-*answer here*
-
-What are the treatments used? What information is missing from this annotation?
-*answer here*
-
-***
-
-In this experiment a culture of each strain was treated with 10 uM auxin and another identical culture was treated with 0 uM auxin as the control. This treatment was done at the time that well 2_A01 was being read. We typically set the time at which the cultures were treated with hormone as T=0. We'll adjust this later. 
-
-The auxin here as you know induces the binding of the F-box protein, TIR1 along with it's associated SCF ubiquitin ligase complex to the IAA proteins. The binding of IAA proteins to SCF^TIR1^ allows ubiquitin to be transferred to the IAA. The ubiquitinated IAA is then degraded by the proteasome along with it's fluorescent label. Using flow cytometry, the amount of fluorescently-labelled IAA in each of the cultures was measured once every 10-15 minutes. What culture was measured in each well is recorded in the `annotation.csv` file. The time at which each well was read is recorded by the cytometer in the flowSet files. 
-
-Before attaching `annotation` to our `flowSet`, we need to make sure that we have a unique identifier (a column that is identical in the flowSet and in the annotation). The easiest way to do this is to pull the sampleNames from flowSet and add them to annotation.
-```{r}
-annotation$name <- sampleNames(flowSet)
-```
-We should also make sure that the order of `sampleNames` matches the order of `annotation`, as these could have been ordered differently in `annotation` and `flowSet`. Double click on annotation over in the **Environment** pane. Quickly scroll through to make sure that the `file` and `name` fields match.  
-Now we can attach this annotation to the flowSet using `annotateFlowSet`. `mergeBy` is the name of that unique identifier column that we created.
-```{r}
-flowSet <- annotateFlowSet(flowSet, annotation_df = annotation, mergeBy = 'name')
-```
-We can then save this annotated flowSet so that we and others can easily re-analyze it later. (You don't need to run the below lines, for this example) 
-```{r, eval = F}
-write.flowSet(flowSet, outdir = 'annotated_flowSet')
-#To read in the annotated flowSet used
-read.flowSet(path = 'path/to/annotated_flowSet', phenoData = 'annotation.txt', alter.names = T)
-```
-
-##Generating graphs
-
-###Basic graphs
-
-Now let's take a quick look at what this raw flow cytometry data looks like using the flowViz package.
-```{r, eval = F}
-biocLite('flowViz')
+```{r, echo = FALSE}
+library(flowCore)
 library(flowViz)
+library(lattice)
+flowSet <- read.flowSet(path = 'flowSet', alter.names = T)
 ```
-One of the easiest ways to learn how to use a new package is to go through the vignettes. These are generally short examples of how to use the package written by the package author.
-```{r, eval = F}
-#what vignettes are available for flowViz?
-vignette(package = 'flowViz')
-#Let's give the 'filters' vignette a look
-vignette('filters', package = 'flowViz')
-#Make a couple of plots of a single flowFrame
+
+
+```{r, echo=FALSE, warning=FALSE}
 xyplot(SSC.H~FSC.H, data = flowSet[['0_A01.fcs']], xlim = c(0, 6E6), ylim = c(0, 6E5), smooth = F)
-xyplot(FL1.A~FSC.H, data = flowSet[['0_A01.fcs']], xlim = c(0, 6E6), ylim = c(0,1E4), smooth = F)
+```
+Here is a plot of the side-scatter versus the forward scatter. Each dot represents a single cell. This approximates a plot of cell granularity on the y-axis vs. cell diameter on the X-axis.   
+
+```{r, echo = FALSE}
+xyplot(FL1.A~FSC.H, data = flowSet[['0_A01.fcs']], xlim = c(0, 6E6), ylim = c(0,2E4), smooth = F)
+```
+Here is a plot of fluorescence, in this case the fluorescence of the Aux/IAA-YFP fusion protein that is used to measure auxin signal transduction. Notice that in the larger cells the fluorscence gets more variable. That's because these cells are older or are potentially clumps of cells. Lets look a a histogram of the fluorescence.   
+
+
+```{r, echo=FALSE}
 histogram(~FL1.A, data = flowSet[['0_A01.fcs']], xlim = c(0,1E4), margin = F, type = 'count', breaks = 500)
 ```
 The histogram shows the number of yeast cells that have Fl1.A values within each bin of a set size across the entire range of FL1.A values. This gives us an idea of the distribution of FL1.A values.
-
-You can save plots by clicking export from the **Plots** pane.
 
 ***  
 #####???Question???  
 Just by eye, what would you estimate as the mean (the average value) of the above FL1.A distribution?
 *answer here*
 
-Make a histogram plot of the same strain we plotted above, but after it has been treated with 10 uM auxin (i.e. use a different well).
-*answer here*
+Here is a histogram plot of the same strain we plotted above, but after it has been treated with 10 uM auxin.  
+```{r}
+histogram(~FL1.A, data = flowSet[['3_F01.fcs']], xlim = c(0,1E4), margin = F, type = 'count', breaks = 500)
+```
+
 
 Again just by eye, what is the mean of this distribution? How has the distribution changed? Is this what you would expect?
 *answer here*
 
 ***
 
-###Plotting with ggplot2
+Before we start exploring this data using graphically, we summarize the distribution of fluorescence in each well (that is for each time point and treatment), by calculating the mean, median and standard deviation of the FL1.A distributions for each well. To get the most precise measurement of auxin signaling, we also want to only include the healthy single cells in this calculation based on the FSC and SSC values (essentially only the red, yellow and light green cells in the SSC vs FSC graph above). These FSC and SSC values have been set by earlier experiments and are called 'gates'. 
 
-These plots use the default graphics package in R. Below we will use the much more powerful and intuitive (once you get the hang of it) `ggplot2` package. This can help us present this data in the most clear and understandable way. 
+We've done this calculation for you because it requires you to download several packages that takes a lot of time. 
 
-Before we start exploring this data using ggplot2 let's summarize the distribution of fluorescence in each well using the `summarizeFlow` function. `summarizeFlow` will calculate the mean, median and standard deviation of the FL1.A distributions for each well. It will only include healthy single cells in this calculation based on the FSC and SSC values (this is what the `ploidy` and `only` arguments are for). These FSC and SSC values have been set by earlier experiments and are called 'gates'. We will load these gates first.
+##Importing and exporting data
 
-```{r}
-loadGates(gatesFile = 'C6Gates.RData')
-dat_sum <- summarizeFlow(flowSet, ploidy = 'diploid', only = 'singlets',channel = 'FL1.A')
+Download "Guseman_et_al_cyto_data.csv" from the Canvas webpage into the "Downloads" folder, or another folder of your choosing. Just remember the path to the file, we'll need it to read the data into R. To read data into R we typically use the `read.csv()` or `read.table()` functions to read in spreadsheets that might have been generated by an instrument, in Excel or in R. The only argument we need to provide is the path to the file as a string (i.e. in quotes). You can always provide the full path to the file, or you can also provide the path relative to your current working directory. You can figure out what the current working directory of your R session is using the `getwd()` function. This function doesn't take any arguments. You can change the working directory using `setwd()`. You can also use the **Files** pane to find your file, and the More button will allow you to Go To Working Directory and Set As Working Directory. Let's read in this data set as an object called `dat_sum`.
+
+```{r, eval = FALSE}
+dat_sum <- read.csv("~/Downloads/Guseman_et_al_cyto_data.csv")
+```
+```{r, echo=FALSE}
+dat_sum <- read.csv("Guseman_et_al_cyto_data.csv")
 ```
 
 ***
@@ -430,15 +361,40 @@ What data type is `dat_sum`?
 What are the column names of `dat_sum`?
 *answer here*
 
+
+Write a line of code to figure out the column names of the dataset.
+*answer here*
+
 ***
 
-Now we can set time to zero when auxin was added, the time when well 2_A01 was read.
+##Very basic data wrangling
+
+In this data frame `strain` includes IAA14 and several mutant variants of IAA14 each fused to a fluorescent protein. We can see the list of possible strains using the code below.
+```{r}
+unique(dat_sum$strain)
+```
+
+***
+#####???Questions???  
+What is the AFB used in this experiment?
+*answer here*
+
+What are the treatments used? What information about this experiment is missing from this data set?
+*answer here*
+
+***
+
+In this experiment a culture of each strain was treated with 10 uM auxin and another identical culture was treated with 0 uM auxin as the control. This treatment was done at the time that well 2_A01 was being read. We typically set the time at which the cultures were treated with hormone as T=0. 
+
+We can set time to zero when auxin was added, the time when well 2_A01 was read, using the following code.
 ```{r}
 #get the time when 2_A01 was read
 T0 <- dat_sum[which(dat_sum$file == '2_A01'), "time"]
 #subtract this time from the time column of dat_sum
 dat_sum$time <- dat_sum$time - T0
 ```
+
+The auxin here, as you know, induces the binding of the F-box protein, TIR1 along with it's associated SCF ubiquitin ligase complex to the IAA proteins. The binding of IAA proteins to SCF^TIR1^ allows ubiquitin to be transferred to the IAA. The ubiquitinated IAA is then degraded by the proteasome along with it's fluorescent label. Using flow cytometry, the amount of fluorescently-labelled IAA in each of the cultures was measured once every 10-15 minutes. What culture was measured in each well is recorded in the data set along with the time at which each well was read (which is recorded by the cytometer). 
 
 Finally, before we graph this data let's make a hypothesis about what effect these mutations will have. Going back to our earlier code:
 ```{r}
@@ -453,6 +409,27 @@ Based on your knowledge of auxin signaling and amino acid structures hypothesize
 *answer here*
 
 ***
+
+##Visualizing data
+
+First, let's install a popular graphing package so we can analyze this data and make beautiful graphs to illustrate the resuts of this experiment. 
+
+###Packages
+
+There are three places where R packages are available:  
+1. [CRAN](http://cran.r-project.org/web/packages/) contains a huge variety of general packages,  
+2. [bioConductor](http://bioconductor.org/) contains packages related to high throughput biological (mostly -omics) data,  
+3. Packages in development may be available from code repositories such as [GitHub](http://github.com),  [Bitbucket](http://bitbucket.org) or others. 
+
+We'll install the 'ggplot2' package from CRAN
+```{r, eval= F}
+#install a package from CRAN (if you exclude the 'repos' argument it may return a list and ask you to select a repository server)
+install.packages('ggplot2')
+```
+```{r}
+#before using the package we must load it into our workspace
+library('ggplot2')
+```
 
 The 'gg' in `ggplot2` stands for 'grammar of graphics'. This grammar allows us to map data to visual representations in a manner similar to how language maps words to abstract concepts. The grammar of graphics allows precise control over each item in a graph, and also provides convenient defaults.  The `qplot` function uses these default values to make quick plots. 
 
@@ -482,7 +459,7 @@ What is causing the error returned by running the above line of code? What does 
 qplot(x = time, y = FL1.Amean, data = dat_sum, color = strain, shape = as.factor(treatment))
 ```
 
-Within the grammar of graphics aesthetics are visual parameters to which you can map a variable. So for example here, `x`, `y`, `color` and `shape` are aesthetics to which we have mapped the variables `time`, `FL1.Amean`, `strain` and `treatment`. If we extend the language grammar metaphor, aesthetics are like nouns, you can have several nouns in a sentence. But we also need a verb to make a sentence, right? The verb-equivalent in the grammar of graphics is called a geometries. These geometries are the methods of representing data, e.g. bar plots, scatter plots, and box-and-whisker plots. In `ggplot2` these geometries are created using which always begin with `geom_`, so you can type 'geom' into the **Help** pane and see a list of all the possibilities. 
+Within the grammar of graphics aesthetics are visual parameters to which you can map a variable. So for example here, `x`, `y`, `color` and `shape` are aesthetics to which we have mapped the variables `time`, `FL1.Amean`, `strain` and `treatment`. If we extend the language grammar metaphor, aesthetics are like nouns, you can have several nouns in a sentence. But we also need a verb to make a sentence, right? The verb-equivalents in the grammar of graphics are called geometries. These geometries are the methods of representing data, e.g. bar plots, scatter plots, and box-and-whisker plots. In `ggplot2` these geometries are created using which always begin with `geom_`, so you can type 'geom' into the **Help** pane and see a list of all the possibilities. 
 
 ***  
 #####???Question???  
@@ -507,7 +484,7 @@ What are the arguments of `ggplot`?
 
 ***
 
-So `ggplot` sets up the aesthetic mapping, then we can add geoms to this `ggplot` aesthetic. Let's try to recreate the plot from above to help solidify this idea.
+So `ggplot` sets up the aesthetic mapping (the axes and other "dimensions" like color, shape and linetype), then we can add geoms to this `ggplot` aesthetic to put data on the plot. Let's try to recreate the plot from above to help solidify this idea.
 
 ```{r}
 #set up the aesthetic mapping, note that we have to put this within an aes function
