@@ -144,8 +144,8 @@ Vectors in R are simply ordered lists of values. These values can be of any type
 
 Let's run through a quick example:
 ```{r}
-string_vector <- c('plant', 'genotype')
-string_vector
+example_vector <- c('plant', 'genotype')
+example_vector
 ```
 
 ***
@@ -161,18 +161,18 @@ What are the arguments that you can pass to `c()`?
 
 Now we have a vector of strings. We can access the individual elements using the square bracket operator.
 ```{r}
-string_vector[1]
-string_vector[2]
+example_vector[1]
+example_vector[2]
 #Note that the indices begin at 1 in R!!!
-string_vector[0]
+example_vector[0]
 ```
 We can also change elements or add elements to the vector using the bracket operator.
 ```{r}
-string_vector[2] <- 'phenotype'
-string_vector[3] <- 'root_length'
-string_vector
-string_vector[4] <- FALSE
-string_vector
+example_vector[2] <- 'phenotype'
+example_vector[3] <- 'root_length'
+example_vector
+example_vector[4] <- FALSE
+example_vector
 ```
 
 ***
@@ -199,7 +199,7 @@ For more info `?list`.
 Variables in R are not limited to just strings or integers or even matrices. You can store and operate on entire spreadsheets with fields of defined data types, using what R calls 'data frames'. The data frame is one of the most fundamental data structures used in R. `?data.frame` provides a wealth of knowledge about data frames, but let's just go ahead and make one! Run the following code.
 ```{r}
 L3 <- LETTERS[1:3]
-fac <- sample(L3, 10, replace = TRUE)
+fac <- sample(x = L3, size = 10, replace = TRUE)
 d <- data.frame(x = 1, y = 1:10, fac = fac)
 #notice how the columns of the data frame can be named using '=', just as if we were creating individual vectors
 d
@@ -350,7 +350,7 @@ Download "Guseman_et_al_cyto_data.csv" from the Canvas webpage into the "Downloa
 dat_sum <- read.csv("~/Downloads/Guseman_et_al_cyto_data.csv")
 ```
 ```{r, echo=FALSE}
-dat_sum <- read.csv("Guseman_et_al_cyto_data.csv")
+dat_sum <- read.csv("~/Desktop/Intro_to_R/Guseman_et_al_cyto_data.csv")
 ```
 
 ***
