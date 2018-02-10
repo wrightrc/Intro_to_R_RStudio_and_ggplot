@@ -1,12 +1,12 @@
 ---
-title: "Introduction to R, RStudio and timecourse flow cytometry"
+title: "Introduction to R, RStudio and visual analysis of timecourse flow cytometry"
 author: "R Clay Wright"
 date: '`r Sys.time()`'
 output:
+  html_document:
+    toc: yes
   word_document:
     reference_docx: Intro_to_R_styles.docx
-    toc: yes
-  html_document:
     toc: yes
 ---
 ```{r setup, include=FALSE}
@@ -28,6 +28,8 @@ In some cases the output from the code will be included in blocks of code. This 
 ```{r}
 print("This is the output from the code")
 ```
+
+Alternatively, if you are familiar with programming in general you may want to follow along with the .Rmd, or R markdown, version of this file. The word and html versions were "knitted" from the R markdown file. Markdown is meant to be an extremely natural and easy to read typesetting language that allows you to mix text, code and figures in a flexible, customizable and reproducible way. See [RStudio's page on R Markdown](https://rmarkdown.rstudio.com/) for more information. Also, use the "Markdown Quick Reference" in "Help" in menu bar to quickly see what formatting characters mean.
 
 Let's get started!
 
